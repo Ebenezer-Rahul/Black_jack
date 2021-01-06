@@ -5,7 +5,7 @@ def clear():
     os.system( 'cls' )
 import random 
 
-
+#suits,ranks and values.
 suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
 ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
 values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8, 'Nine':9, 'Ten':10, 'Jack':10, 'Queen':10, 'King':10, 'Ace': 1 }
@@ -41,6 +41,73 @@ def hit(is_player) :
         dealer_cards.append(shuffle_deck[0])
         shuffle_deck.pop(0)
         pass
+    pass
+
+#caluclates the sum of player's cards in the intrest of player
+def player_sum() :
+    player_sum = 0 
+    no_of_aces = 0
+    for player_card in player_cards :
+        player_sum += player_card.value
+        if player_card.rank == "Ace":
+            no_of_aces += 1
+            pass
+        else :
+            pass
+    while no_of_aces > 0 :
+        if player_sum + 10 <= 21 :
+            player_sum += 10
+            pass
+        else :
+            pass
+        no_of_aces = no_of_aces -1
+        pass
+
+    return player_sum
+#caluclates the sum of dealer's cards in the intrest of dealer
+def dealer_sum() :
+    dealer_sum = 0 
+    no_of_aces = 0
+    for dealer_card in dealer_cards :
+        dealer_sum += dealer_card.value
+        if dealer_card.rank == "Ace" :
+            no_of_aces += 1
+            pass
+        else :
+            pass
+    while no_of_aces > 0 :
+        if dealer_sum + 10 :
+            dealer_sum += 10
+            pass
+        else :
+            pass 
+        no_of_aces = no_of_aces -1
+        pass
+    return (dealer_sum)
+#caluculates the sum that is to be displayed to player 
+def display_dealer_sum() :
+    display_dealer_sum = 0
+    dealer_faceup_cards = [dealer_card for dealer_card in dealer_cards]# actually just written dealer_faceup_cards = dealer_cards //but it does not work that way as python gets confused and just replaces dealerxcards with an emptylist(i.e dealer_faceup_cards)
+    dealer_faceup_cards.reverse()
+    dealer_faceup_cards.pop()
+    no_of_aces = 0
+    for dealer_card in dealer_faceup_cards :
+        display_dealer_sum += dealer_card.value
+        if dealer_card.rank == "Ace" :
+            no_of_aces += 1
+            pass
+        else :
+            pass
+    while no_of_aces > 0 :
+        if display_dealer_sum + 10 :
+            display_dealer_sum += 10
+            pass
+        else :
+            pass 
+        no_of_aces = no_of_aces -1
+        pass
+    return (display_dealer_sum)
+
 #function to display game
 def display_game(game_ended) :
     #Game Name
@@ -87,34 +154,46 @@ def display_game(game_ended) :
             pass
         print("\n")
         #only showing the sum of player's cards and sum of face up cards of dealer
-        print ("The sum of player is : %d \nThe sum of the dealer is : %d + something"  %(player_sum(),dealer_sum()-dealer_cards[0].value))
+        print ("The sum of player is : %d \nThe sum of the dealer is : %d + something"  %(player_sum(),display_dealer_sum()))
         print("\n")
         pass
     pass
-#caluclates the sum of player's cards
-def player_sum() :
-    player_sum = 0 
-    for player_card in player_cards :
-        player_sum += player_card.value
-    return player_sum
-#caluclates the sum of dealer's cards
-def dealer_sum() :
-    dealer_sum = 0 
-    for dealer_card in dealer_cards :
-        dealer_sum += dealer_card.value
-    return (dealer_sum) 
+ 
+
+    
 
 
-player_cards = []
-dealer_cards = []
 def rules() :
     print(" ")
     print(" " + "_"*75)
     print("|" + " "*75 + "|")
     print("|" + " "*30 +"RULES of BACKJACK"+ " "*28 + "|")
     print("|" + " "*75 + "|")
+    print("|" + " #This is simplified version of back Jack" + " "*34+ "|")
+    print("|" + " #The game has 2 players player(i.e you) and dealer(in this case computer) " + "|")
+    print("|" + " #The game begins with 2 players recieving 2 cards from a shuffeled deck   " + "|")
+    print("|" + " #Both of the player cards are faced up and dealer's cards one is faceup   " + "|")
+    print("|" + "  and other is face down" + " "*51 + "|")
+    print("|" + " #The palyer now places his bet" + " "*44 + "|")
+    print("|" + " #The player goes first he has to choose to hit or stay" + " "*20 +"|")
+    print("|" + " #Hit means the player needs to draw a card from deck" + " "*22 + "|")
+    print("|" + " #At some point player chooses to Stay" + " "*37 + "|")
+    print("|" + " #The dealer starts hitting until he beats the player or busts" + " "*13 + "|")
+    print("|" + " #Busting means going over sum of 21" + " "*39 + "|")
+    print("|" + " #The objective of player is to get as close to sum 21 than dealer does" + " "*4 + "|")
+    print("|" + "  without busting" + " "*58 + "|")
+    print("|" + " #And vice versa for the dealer" + " "*44 + "|")
+    print("|" + " #All numbered card have their value as the number itself" + " "*18 + "|")
+    print("|" + " #jack, queen , king have a value as 10" + " "*36 + "|")
+    print("|" + " #aces can have value of 1 or 11 whichever is suitable for dealer or player" + "|")
+    print("|" + " #if player wins the game he gets 2 times the bet as the reward            " + "|")
+    print("|" + " #if the player loses then he loses his bet                                " + "|")
+    print("|" + " # GOOD LUCK                                                               " + "|")     
+    print("|" + " "*75 + "|")
     print(" " + "-"*75)
     pass
+player_cards = []
+dealer_cards = []
 
 def start_game() :
     
